@@ -1,0 +1,22 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "Application of the game Reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BreanP/reversi.git"
+  },
+  "keywords": [
+    "reversi"
+  ],
+  "author": "Brean",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/BreanP/reversi/issues"
+  },
+  "homepage": "https://github.com/BreanP/reversi#readme"
+}
