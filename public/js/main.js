@@ -1,5 +1,6 @@
 /* functions for general use */
-function getURLParameters(whichParam) {
+function getURLParameters(whichParam)
+{
   var pageURL = window.location.search.substring(1);
   var pageURLVariables = pageURL.split('&');
   for(var i = 0; i < pageURLVariables.length; i++){
@@ -7,7 +8,7 @@ function getURLParameters(whichParam) {
     if(parameterName[0] == whichParam){
       return parametername[1];
     }
-  }
+}
 
 var username = getURLParameters('username');
 if('undefined' == typeof username || !username){
