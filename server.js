@@ -6,7 +6,7 @@ var port = process.env.PORT;
 var directory = __dirname + '/public';
 
 if(typeof port == 'undefined' || !port) {
-	directory = '.public';
+	directory = './public';
 	port = 8080;
 }
 
