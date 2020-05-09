@@ -28,7 +28,7 @@
 
       <div class="row">
         <div class="col">
-          <form onsubmit='submitForm()' class='form-inline'>
+          <form onsubmit='submitForm(); return false;' class='form-inline'>
             <div class='form-group'>
               <label for='username' class='col-form-label sr-only'>Enter a username</label>
               <input class='form-control' type='text' value='' id='username' placeholder="Enter your user name" />
