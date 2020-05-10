@@ -8,6 +8,7 @@ function getURLParameters(whichParam)
     if(parameterName[0] == whichParam){
       return parameterName[1];
     }
+  }
 }
 
 var username = getURLParameters('username');
