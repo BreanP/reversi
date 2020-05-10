@@ -27,7 +27,7 @@ console.log('The server is running');
 /* Set up the web socket server */
 var io = require('socket.io').listen(app);
 
-io.sockets.on('connection', function(socket) {
+io.sockets.on('connection', function (socket) {
 	function log() {
 		var array = ['*** Server Log Message: '];
 		for(var i = 0; i < arguments.length; i++){
