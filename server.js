@@ -44,7 +44,10 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('join_room',function(socket) {
+
+/* join_room command */
+
+	socket.on('join_room',function(payload) {
 		log('server received a command','join_room',payload);
 		if(('undefined' === typeof payload) || !payload){
 			var error_message = 'join_room had no payload, command aborted';
@@ -96,7 +99,7 @@ io.sockets.on('connection', function (socket) {
 														result: 'success',
 														room: room,
 														username: username,
-														membership: (numClients + 1);
+														membership: (numClients + 1)
 												};
 		io.sockets.in(room).emit('join_room_response',success_data);
 		log('Room '+room+' was joined by '+username);
