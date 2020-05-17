@@ -124,7 +124,7 @@ io.sockets.on('connection', function (socket) {
 											socket_id: socket.id
 										};
 			delete players[socket.id];
-			io.in(room).emit('players_disconnected',payload);
+			io.in(room).emit('player_disconnected',payload);
 		}
 
 	});
