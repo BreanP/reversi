@@ -127,6 +127,7 @@ socket.on('invite_response',function(payload){
     $('.socket_'+payload.socket_id+' button').replaceWith(newNode);
 });
 
+/* Handle a notification that we have been invited */
 socket.on('invited',function(payload){
     if(payload.result == 'fail'){
       alert(payload.message);
@@ -146,6 +147,7 @@ function uninvite(who){
   socket.emit('uninvite', payload);
 }
 
+/* Handle a response after sending an univite message to the server */
 socket.on('uninvite_response',function(payload){
     if(payload.result == 'fail'){
       alert(payload.message);
@@ -155,6 +157,7 @@ socket.on('uninvite_response',function(payload){
     $('.socket_'+payload.socket_id+' button').replaceWith(newNode);
 });
 
+/* Handle a notification that we have been uninvited */
 socket.on('uninvited',function(payload){
     if(payload.result == 'fail'){
       alert(payload.message);
@@ -165,7 +168,9 @@ socket.on('uninvited',function(payload){
 });
 /* */
 
-/* Game_Start */
+
+
+/* Game_Start message */
 function game_start(who){
   var payload = {};
   payload.requested_user = who;
@@ -174,7 +179,7 @@ function game_start(who){
   socket.emit('game_start', payload);
 }
 
-socket.on('game_start',function(payload){
+socket.on('game_start_response',function(payload){
     if(payload.result == 'fail'){
       alert(payload.message);
       return;
@@ -208,7 +213,7 @@ socket.on('send_message_response',function(payload){
     var newNode = $(newHTML);
     newNode.hide();
     $('#messages').append(newNode);
-    newNode.slidedown(1000);
+    newNode.slideDown(1000);
 });
 
 
