@@ -185,4 +185,71 @@ io.sockets.on('connection', function (socket) {
 		io.sockets.in(room).emit('send_message_response',success_data);
 		log('Message sent to room '+room+' by '+username);
 	});
+
+
+
+	/* invite command */
+	socket.on('invite',function(payload) {
+		log('invite with '+JSON.stringify(payload));
+		if(('undefined' === typeof payload) || !payload){
+			var error_message = 'invite had no payload, command aborted';
+			log(error_message);
+			socket.emit('invite_response', {
+																						result: 'fail',
+																						message: error_message
+																				});
+			return;
+		}
+
+		var username = players[socket.id].username;
+		if(('undefined' === typeof username) || !username){
+			var error_message = 'invite can\'t identify who sent the message';
+			log(error_message);
+			socket.emit('invite_response', {
+																						result: 'fail',
+																						message: error_message
+																				});
+			return;
+		}
+
+		var requested_user = payload.requested_user;
+		if(('undefined' === typeof requested_user) || !requested_user){
+			var error_message = 'invite didn\'t specify a requested_user, command aborted';
+			log(error_message);
+			socket.emit('invite_response', {
+																						result: 'fail',
+																						message: error_message
+																				});
+			return;
+		}
+
+		var room = players[socket.id].room;
+		var roomObject = io.socket.adapter.rooms[room];
+
+		if(roomObject.sockets.hasOwnProperty(requested_user)){
+			var error_message = 'invite requested a user that wasn\'t in the room, command aborted';
+			log(error_message);
+			socket.emit('invite_response', {
+																						result: 'fail',
+																						message: error_message
+																				});
+			return;
+		}
+
+
+
+		var success_data = {
+														result: 'success',
+														socket_id: requested_user
+												};
+		socket.emit('invite_response', success_data);
+
+		var success_data = {
+														result: 'success',
+														socket_id: socket.id
+												};
+		socket.to(requested_user).emit('invited', success_data);
+		log('invite successful');
+	});
+
 });
