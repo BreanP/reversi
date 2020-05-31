@@ -378,26 +378,27 @@ socket.on('game_update',function(payload){
       }
 
       /* Set up interactivity */
-      $('#'+row+'_'+column).off('click');
-      $('#'+row+'_'+column).addClass('hovered_over');
+  $('#'+row+'_'+column).off('click');
+  $('#'+row+'_'+column).removeClass('hovered_over');
 
-      if(payload.game.whose_turn === my_color){
-        if(payload.game.legal_moves[row][column] === my_color.substr(0,1)){
-          $('#'+row+'_'+column).addClass('hovered_over');
-          $('#'+row+'_'+column).click(function(r,c){
-            return function(){
-              var payload = {};
-              payload.row = r;
-              payload.column = c;
-              payload.color = my_color;
-              console.log('*** Client Log Message: \'play_token\' payload: '+JSON.stringify(payload));
-              socket.emit('play_token',payload);
-              };
-          }(row,column));
-        }
-      }
+  if(payload.game.whose_turn === my_color){
+    if(payload.game.legal_moves[row][column] === my_color.substr(0,1)){
+      $('#'+row+'_'+column).addClass('hovered_over');
+      $('#'+row+'_'+column).click(function(r,c){
+        return function(){
+          var payload = {};
+          payload.row = r;
+          payload.column = c;
+          payload.color = my_color;
+          console.log('*** Client Log Message: \'play_token\' payload: '+JSON.stringify(payload));
+          socket.emit('play_token',payload);
+          };
+      }(row,column));
     }
   }
+
+  }
+}
 
   $('#whitesum').html(whitesum);
   $('#blacksum').html(blacksum);
