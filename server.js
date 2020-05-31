@@ -595,7 +595,7 @@ function create_new_game(){
  	  if((c+dc < 0) || (c+dc > 7)){
  		 return false;
  	  }
-		return check_line_match(who,dr,dc,r+dr+dr,c+dc+dc,board);
+		return check_line_match(who,dr,dc,r+dr,c+dc,board);
 	}
 
 
