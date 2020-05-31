@@ -260,9 +260,6 @@ $(function(){
   socket.emit('join_room',payload);
 
   $('#quit').append('<a href="lobby.html?username='+username+'" class="btn btn-danger btn-default active" role="button" aria-pressed="true">Quit</a>');
-)
-
-
 });
 
 var old_board = [
@@ -299,7 +296,8 @@ socket.on('game_update',function(payload){
   /* Update my color */
   if(socket.id == payload.game.player_white.socket){
     my_color = 'white';
-  } else if(socket.id == payload.game.player_black.socket){
+  }
+  else if(socket.id == payload.game.player_black.socket){
     my_color = 'black';
   }
   else{
@@ -315,7 +313,7 @@ socket.on('game_update',function(payload){
   var blacksum = 0;
 
   var row, column;
-  for(row=0; row < 8; row++){
+  for(row = 0; row < 8; row++){
     for(column = 0; column < 8; column++){
 
       if(board[row][column] == 'w'){
@@ -327,7 +325,7 @@ socket.on('game_update',function(payload){
 
       /* If a board space has changed */
       if(old_board[row][column] != board [row][column]){
-        if(old_board[row][column] == '?' && board[row][column] == ' '){
+        if(old_board[row][column] == '?' && board [row][column] == ' '){
           $('#'+row+'_'+column).html('<img src="assets/images/empty.gif" alt="empty square"/>');
         }
         else if(old_board[row][column] == '?' && board[row][column] == 'w'){
@@ -357,6 +355,8 @@ socket.on('game_update',function(payload){
         else{
           $('#'+row+'_'+column).html('<img src="assets/images/error.gif" alt="error"/>');
         }
+
+
         /* Set up interactivity */
         $('#'+row+'_'+column).off('click');
         if(board[row][column] == ' '){
@@ -369,9 +369,10 @@ socket.on('game_update',function(payload){
               payload.color = my_color;
               console.log('*** Client Log Message: \'play_token\' payload: '+JSON.stringify(payload));
               socket.emit('play_token',payload);
-            };
+              };
           }(row,column));
-        } else{
+        }
+        else{
           $('#'+row+'_'+column).removeClass('hovered_over');
         }
       }

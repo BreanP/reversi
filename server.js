@@ -449,8 +449,8 @@ io.sockets.on('connection', function (socket) {
 			return;
 		}
 
-		var row = players[socket.id].row;
-		if(('undefined' === typeof row) || row < 0 | | row > 7){
+		var row = payload.row;
+		if(('undefined' === typeof row) || row < 0 || row > 7){
 			var error_message = 'play_token didn\'t specify a valid row, command aborted';
 			log(error_message);
 			socket.emit('play_token_response', {
@@ -460,8 +460,8 @@ io.sockets.on('connection', function (socket) {
 			return;
 		}
 
-		var column = players[socket.id].column;
-		if(('undefined' === typeof column) || column < 0 | | column > 7){
+		var column = payload.column;
+		if(('undefined' === typeof column) || column < 0 || column > 7){
 			var error_message = 'play_token didn\'t specify a valid column, command aborted';
 			log(error_message);
 			socket.emit('play_token_response', {
@@ -471,8 +471,8 @@ io.sockets.on('connection', function (socket) {
 			return;
 		}
 
-		var color = players[socket.id].color;
-		if(('undefined' === typeof color) || !color | | (color != 'white' && color != 'black')){
+		var color = payload.color;
+		if(('undefined' === typeof color) || !color || (color != 'white' && color != 'black')){
 			var error_message = 'play_token didn\'t specify a valid color, command aborted';
 			log(error_message);
 			socket.emit('play_token_response', {
@@ -585,10 +585,10 @@ function send_game_update(socket, game_id, message){
 	while((numClients-1) > 2);
 
 	/* Assign this socket a color */
-	if((games[game_id].player_white.socket != socket.id) && (games[game_id].player_black.socket != socket.id){
+	if((games[game_id].player_white.socket != socket.id) && (games[game_id].player_black.socket != socket.id)){
 		console.log('Player isn\'t assigned a color: '+socket.id);
 
-		if((games[game_id].player_white.socket != '') && (games[game_id].player_black.socket != '')){
+		if((games[game_id].player_black.socket != '') && (games[game_id].player_white.socket != '')){
 			games[game_id].player_white.socket = '';
 			games[game_id].player_white.username = '';
 			games[game_id].player_black.socket = '';
