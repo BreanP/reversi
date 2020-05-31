@@ -18,6 +18,6 @@ table#game_board td{
 }
 
 td.hovered_over:hover {
-  background-image: url('../images/error.gif');
+  background-image: url('../images/hover.gif');
   background-size: 100% 100%;
 }
